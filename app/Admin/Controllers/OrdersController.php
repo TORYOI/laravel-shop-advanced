@@ -13,6 +13,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 use App\Http\Requests\Admin\HandleRefundRequest;
+use App\Services\OrderService;
 
 class OrdersController extends Controller
 {
@@ -118,7 +119,7 @@ class OrdersController extends Controller
                 'extra' => $extra,
             ]);
             // 调用退款逻辑
-            $this->_refundOrder($order);
+            $orderService->refundOrder($order);
         } else {
             // 将拒绝退款理由放到订单的 extra 字段中
             $extra = $order->extra ?: [];
